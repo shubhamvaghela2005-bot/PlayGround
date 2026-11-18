@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+  <meta name="theme-color" content="#101a19" />
+  <title>WILDER — The Long Night</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="game-shell">
+    <canvas id="world" aria-label="Wilder survival world"></canvas>
+    <div class="vignette"></div>
+    <header class="topbar">
+      <div class="brand"><div class="brand-mark">W</div><div><strong>WILDER</strong><small>THE LONG NIGHT</small></div></div>
+      <div class="world-status"><span class="live-dot"></span><span id="season">PINEFALL · DAY 01</span><i></i><span id="clock">08:14</span><i></i><span class="weather"><b>☀</b> CLEAR</span></div>
+      <button class="icon-btn menu-btn" id="menuButton" aria-label="Open menu">☰</button>
+    </header>
+    <section class="left-rail">
+      <div class="player-card panel"><div class="avatar">✦</div><div class="player-meta"><strong>Wayfarer</strong><span><b class="online-dot"></b> YOU · SURVIVOR</span></div><div class="level">01</div></div>
+      <div class="vitals panel">
+        <div class="vital-row"><span class="vital-icon heart">♥</span><div class="vital-track"><div class="vital-fill health-fill" id="healthFill"></div></div><b id="healthText">100</b></div>
+        <div class="vital-row"><span class="vital-icon">◉</span><div class="vital-track"><div class="vital-fill stamina-fill" id="staminaFill"></div></div><b id="staminaText">100</b></div>
+      </div>
+      <div class="party panel"><div class="panel-heading"><span>YOUR PARTY</span><span class="party-count">03/04</span></div>
+        <div class="party-member"><div class="member-avatar m1">M</div><span><strong>Marlow</strong><small>Gathering · 42m</small></span><i class="member-ping"></i></div>
+        <div class="party-member"><div class="member-avatar m2">R</div><span><strong>Rook</strong><small>Building · 18m</small></span><i class="member-ping"></i></div>
+        <button class="invite-btn" id="inviteButton">＋ INVITE A FRIEND <kbd id="roomCode">F7K2</kbd></button>
+      </div>
+      <div class="objective panel"><div class="objective-kicker"><span>✧</span> YOUR FIRST NIGHT</div><strong id="objectiveTitle">Make it through dusk</strong><p id="objectiveText">Gather wood and stone, then build a fire before nightfall.</p><div class="objective-progress"><span id="objectiveProgress"></span></div><small id="objectiveCount">0 / 12 resources</small></div>
+    </section>
+    <aside class="right-rail"><div class="map-panel panel"><div class="map-heading"><span>THE PINEFALL</span><span class="map-coords" id="coords">N 04 · E 12</span></div><canvas id="minimap" width="180" height="180"></canvas><div class="map-footer"><i></i> SHARED WORLD <span>•</span> <b>3 SURVIVORS</b></div></div>
+      <div class="nearby panel"><div class="panel-heading"><span>NEARBY</span><span class="signal">◔  GOOD</span></div><div class="nearby-item"><span class="nearby-symbol tree-symbol">♣</span><span><strong>Old-growth pine</strong><small id="treeDistance">12m away</small></span><span class="distance-dot"></span></div><div class="nearby-item"><span class="nearby-symbol stone-symbol">◆</span><span><strong>Stone outcrop</strong><small>28m away</small></span><span class="distance-dot dim"></span></div></div>
+    </aside>
+    <div class="feed" id="feed"><div class="feed-line"><span class="feed-icon">✦</span><span>The forest is quiet... for now.</span></div></div>
+    <div class="interaction" id="interaction"></div>
+    <div class="bottom-ui">
+      <div class="resource-strip panel"><div class="resource"><span class="res-icon wood-icon">▰</span><span><small>WOOD</small><b id="woodCount">8</b></span></div><div class="resource"><span class="res-icon stone-icon">◆</span><span><small>STONE</small><b id="stoneCount">4</b></span></div><div class="resource"><span class="res-icon fiber-icon">❋</span><span><small>FIBER</small><b id="fiberCount">2</b></span></div><div class="resource"><span class="res-icon food-icon">◉</span><span><small>BERRIES</small><b id="berryCount">3</b></span></div><button class="craft-toggle" id="craftButton">⚒ <span>CRAFT</span></button></div>
+      <div class="hotbar-row"><div class="hotbar-label"><span>QUICK SLOTS</span><span id="buildHint">B TO BUILD</span></div><div class="hotbar">
+        <button class="slot active" data-slot="0"><kbd>1</kbd><span class="slot-art axe">⚒</span><b>STONE AXE</b><small>TOOL</small></button>
+        <button class="slot" data-slot="1"><kbd>2</kbd><span class="slot-art torch">♨</span><b>TORCH</b><small>LIGHT</small></button>
+        <button class="slot" data-slot="2"><kbd>3</kbd><span class="slot-art spear">╱</span><b>WOOD SPEAR</b><small>WEAPON</small></button>
+        <button class="slot build-slot" data-slot="3"><kbd>4</kbd><span class="slot-art wall">▤</span><b>WOOD WALL</b><small>BUILD</small></button>
+        <button class="slot build-slot" data-slot="4"><kbd>5</kbd><span class="slot-art fire">♨</span><b>CAMPFIRE</b><small>BUILD</small></button>
+        <button class="slot empty" data-slot="5"><kbd>6</kbd><span class="slot-art">＋</span><b>EMPTY</b><small>—</small></button>
+      </div></div>
+    </div>
+    <div class="controls-tip"><kbd>W A S D</kbd> MOVE <span>·</span><kbd>SPACE</kbd> ATTACK <span>·</span><kbd>E</kbd> GATHER <span>·</span><kbd>SHIFT</kbd> SPRINT</div>
+    <div class="touch-controls" aria-label="Touch controls"><div class="joystick" id="joystick"><div class="joy-knob"></div></div><button class="touch-action" id="touchGather">E<br><small>GATHER</small></button><button class="touch-action attack-touch" id="touchAttack">✦<br><small>ATTACK</small></button></div>
+    <div class="toast" id="toast"></div>
+    <div class="modal hidden" id="modal"><div class="modal-card"><button class="modal-close" id="modalClose">×</button><div class="modal-emblem">✧</div><h2 id="modalTitle">Crafting</h2><p id="modalDesc">Turn what you find into what you need.</p><div class="recipe-list" id="recipeList"></div><button class="primary-btn" id="resumeButton">BACK TO THE WILD</button></div></div>
+  </main>
+  <script src="game.js"></script>
+</body>
+</html>
